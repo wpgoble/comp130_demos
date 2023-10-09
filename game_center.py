@@ -5,29 +5,53 @@ game_name = int(game_name)
 
 # play rock, paper, scissors
 if game_name == 1:
-    # Asks user to pick an int to play rps
-    user = int(input("Pick [1]: Rock, [2]: Paper, or [3]: Scissors: "))
-    computer = random.randint(1, 3) # randomly picks computer choice
+    player1_points = 0
+    computer_points = 0
 
-    # Logic behind the game 
-    if user == computer:
+    for charlie in range(3):
+        if (player1_points == 2 and computers_points == 0) or (computer_points == 2 and player1_points == 0):
+            break
+        
+        # Asks user to pick an int to play rps
+        user = int(input("Pick [1]: Rock, [2]: Paper, or [3]: Scissors: "))
+        computer = random.randint(1, 3) # randomly picks computer choice            
+
+        # Logic behind the game 
+        if user == computer:
+            print("You tied")
+            player1_points += 1
+            computer_points += 1
+        else:
+            if user == 1:
+                if computer == 2:
+                    print("You lose. Paper covers Rock")
+                    computer_points += 1
+                else:
+                    print("You win. Rock beats Scissors")
+                    player1_points += 1
+            elif user == 2:
+                if computer == 3:
+                    print("You lose. Scissors cuts Paper")
+                    computer_points += 1
+                else:
+                    print("You win. Paper covers Rock")
+                    player1_points += 1
+            elif user == 3:
+                if computer == 1:
+                    print("You lose. Rock beats Scissors")
+                    computer_points += 1
+                else:
+                    print("You win. Scissors cuts Paper")
+                    player1_points += 1
+
+    if player1_points == computer_points:
         print("You tied")
     else:
-        if user == 1:
-            if computer == 2:
-                print("You lose. Paper covers Rock")
-            else:
-                print("You win. Rock beats Scissors")
-        elif user == 2:
-            if computer == 3:
-                print("You lose. Scissors cuts Paper")
-            else:
-                print("You win. Paper covers Rock")
-        elif user == 3:
-            if computer == 1:
-                print("You lose. Rock beats Scissors")
-            else:
-                print("You win. Scissors cuts Paper")
+        if player1_points > computer_points:
+            print(f"Congrats you win! {player1_points} vs {computer_points}")
+        else:
+            print("You lost to a computer")
+
 # now we can play totality
 elif game_name == 2:
     print("Welcome to totality! To play you will roll 3 die and tally the score.")
@@ -46,13 +70,13 @@ elif game_name == 2:
     if p1_d1 == p1_d2 == p1_d3:
         player1_score = p1_d1**3
     elif p1_d1 == p1_d2:
-        player1_score = pl_d1**2 + p1_d3
+        player1_score = p1_d1**2 + p1_d3
     elif p1_d1 == p1_d3:
-        player1_score = pl_d1**2 + p1_d2
+        player1_score = p1_d1**2 + p1_d2
     elif p1_d3 == p1_d2:
-        player1_score = pl_d2**2 + p1_d1
+        player1_score = p1_d2**2 + p1_d1
     else:
-        player1_score = pl_d1 + p1_d2 + p1_d3
+        player1_score = p1_d1 + p1_d2 + p1_d3
 
     # figure out player 2
     player2_score = 0
